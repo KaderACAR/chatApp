@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 export function Home() {
   return (
-    <View style={styles.container}>
+    <View className="bg-red-600 flex-1">
       <Text>Home Screen</Text>
       <Text>Open up 'src/App.tsx' to start working on your app!</Text>
       <Button screen="Profile" params={{ user: 'jane' }}>

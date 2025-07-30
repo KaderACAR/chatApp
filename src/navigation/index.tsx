@@ -47,6 +47,22 @@ const HomeTabs = createBottomTabNavigator({
         ),
       },
     },
+ Updatess: {
+      screen: Updates,
+      options: {
+        tabBarIcon: ({ color, size }) => (
+          <Image
+            source={bell}
+            tintColor={color}
+            style={{
+              width: size,
+              height: size,
+            }}
+          />
+        ),
+      },
+    },
+
   },
 });
 
