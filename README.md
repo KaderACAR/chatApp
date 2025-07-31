@@ -1,66 +1,112 @@
-# Starter Template with React Navigation
+# ChatApp - React Native
 
-This is a minimal starter template for React Native apps using Expo and React Navigation.
+WhatsApp benzeri bir mobil chat uygulaması. React Native ve NativeWind kullanılarak geliştirilmiştir.
 
-It includes the following:
+## Özellikler
 
-- Example [Native Stack](https://reactnavigation.org/docs/native-stack-navigator) with a nested [Bottom Tab](https://reactnavigation.org/docs/bottom-tab-navigator)
-- Web support with [React Native for Web](https://necolas.github.io/react-native-web/)
-- TypeScript support and configured for React Navigation
-- Automatic [deep link](https://reactnavigation.org/docs/deep-linking) and [URL handling configuration](https://reactnavigation.org/docs/configuring-links)
-- Theme support [based on system appearance](https://reactnavigation.org/docs/themes/#using-the-operating-system-preferences)
-- Expo [Development Build](https://docs.expo.dev/develop/development-builds/introduction/) with [Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/)
-- Edge-to-edge configured on Android with [`react-native-edge-to-edge`](https://www.npmjs.com/package/react-native-edge-to-edge)
+- 🔐 Kullanıcı kaydı ve girişi (Mock)
+- 💬 Mesajlaşma (Mock)
+- 👥 Kullanıcı listesi
+- 🔍 Kullanıcı arama
+- 📱 Modern ve kullanıcı dostu arayüz
+- 🌙 NativeWind ile stil yönetimi
 
-## Getting Started
+## Teknolojiler
 
-1. Create a new project using this template:
+- **React Native** - Mobil uygulama geliştirme
+- **NativeWind** - CSS-in-JS styling
+- **TypeScript** - Tip güvenliği
+- **Expo** - Geliştirme platformu
+- **React Navigation** - Navigation yönetimi
 
-   ```sh
-   npx create-expo-app@latest --template react-navigation/template
-   ```
+## Kurulum
 
-2. Edit the `app.json` file to configure the `name`, `slug`, `scheme` and bundle identifiers (`ios.bundleIdentifier` and `android.bundleIdentifier`) for your app.
+1. Projeyi klonlayın:
+```bash
+git clone <repository-url>
+cd chatApp
+```
 
-3. Edit the `src/App.tsx` file to start working on your app.
+2. Bağımlılıkları yükleyin:
+```bash
+npm install
+```
 
-## Running the app
+3. Uygulamayı çalıştırın:
+```bash
+npm start
+```
 
-- Install the dependencies:
+## Proje Yapısı
 
-  ```sh
-  npm install
-  ```
+```
+src/
+├── contexts/
+│   └── AuthContext.tsx      # Authentication context
+├── navigation/
+│   ├── index.tsx           # Ana navigation
+│   └── screens/
+│       ├── Login.tsx       # Giriş ekranı
+│       ├── Register.tsx    # Kayıt ekranı
+│       ├── ChatList.tsx    # Sohbet listesi
+│       ├── Chat.tsx        # Mesajlaşma ekranı
+│       └── NewChat.tsx     # Yeni sohbet ekranı
+├── services/
+│   ├── authService.ts      # Authentication servisi (Mock)
+│   └── chatService.ts      # Chat servisi (Mock)
+└── App.tsx                 # Ana uygulama bileşeni
+```
 
-- Start the development server:
+## Ekranlar
 
-  ```sh
-  npm start
-  ```
+### 1. Login Ekranı
+- E-posta ve şifre ile giriş (Mock)
+- Kayıt ekranına yönlendirme
+- Modern ve temiz tasarım
 
-- Build and run iOS and Android development builds:
+### 2. Register Ekranı
+- Kullanıcı kaydı (ad, e-posta, şifre) (Mock)
+- Şifre doğrulama
+- Giriş ekranına yönlendirme
 
-  ```sh
-  npm run ios
-  # or
-  npm run android
-  ```
+### 3. ChatList Ekranı
+- Mevcut sohbetlerin listesi (Mock)
+- Son mesaj önizlemesi
+- Yeni sohbet başlatma butonu
+- Çıkış yapma özelliği
 
-- In the terminal running the development server, press `i` to open the iOS simulator, `a` to open the Android device or emulator, or `w` to open the web browser.
+### 4. Chat Ekranı
+- Mesajlaşma (Mock)
+- Mesaj gönderme/alma
+- Otomatik scroll
+- Mesaj zaman damgası
 
-## Notes
+### 5. NewChat Ekranı
+- Kullanıcı listesi (Mock)
+- Kullanıcı arama
+- Yeni sohbet başlatma
 
-This project uses a [development build](https://docs.expo.dev/develop/development-builds/introduction/) and cannot be run with [Expo Go](https://expo.dev/go). To run the app with Expo Go, edit the `package.json` file, remove the `expo-dev-client` package and `--dev-client` flag from the `start` script.
+## Mock Servisler
 
-We highly recommend using the development builds for normal development and testing.
+Bu uygulama şu anda mock servisler kullanmaktadır:
 
-The `ios` and `android` folder are gitignored in the project by default as they are automatically generated during the build process ([Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/)). This means that you should not edit these folders directly and use [config plugins](https://docs.expo.dev/config-plugins/) instead. However, if you need to edit these folders, you can remove them from the `.gitignore` file so that they are tracked by git.
+- **Authentication**: Gerçek Firebase Authentication yerine mock servis
+- **Chat**: Gerçek Firestore yerine mock servis
+- **Messages**: Gerçek zamanlı mesajlaşma yerine mock veri
 
-## Resources
+Gerçek Firebase entegrasyonu için:
+1. Firebase projesi oluşturun
+2. Firebase SDK'yı ekleyin
+3. Mock servisleri gerçek Firebase servisleriyle değiştirin
 
-- [React Navigation documentation](https://reactnavigation.org/)
-- [Expo documentation](https://docs.expo.dev/)
+## Katkıda Bulunma
 
----
+1. Fork yapın
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Commit yapın (`git commit -m 'Add amazing feature'`)
+4. Push yapın (`git push origin feature/amazing-feature`)
+5. Pull Request oluşturun
 
-Demo assets are from [lucide.dev](https://lucide.dev/)
+## Lisans
+
+Bu proje MIT lisansı altında lisanslanmıştır.
