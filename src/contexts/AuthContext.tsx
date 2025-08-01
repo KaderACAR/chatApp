@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { authService } from '../services/authService';
+import { db } from '../config/firebaseConfig'; // Firestore bağlantın burada olmalı
+import { doc, setDoc } from 'firebase/firestore'; // Firestore ekleme
+
+
 
 interface User {
   uid: string;
@@ -58,14 +62,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const register = async (email: string, password: string, displayName: string) => {
-    try {
-      const userData = await authService.register(email, password, displayName);
-      setUser(userData);
-    } catch (error) {
-      throw error;
-    }
-  };
+  // Removed duplicate register function
+
+const register = async (email: string, password: string, displayName: string) => {
+  try {
+    const userData = await authService.register(email, password, displayName);
+    setUser(userData);
+
+    // Firestore'a kullanıcı bilgisi ekle
+    await setDoc(doc(db, 'users', userData.uid), {
+      uid: userData.uid,
+      email: userData.email,
+      displayName: displayName,
+      createdAt: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    throw error;
+  }
+};
+
 
   return (
     <AuthContext.Provider value={{

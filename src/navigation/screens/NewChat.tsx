@@ -11,6 +11,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../contexts/AuthContext';
 import { chatService } from '../../services/chatService';
 import LoadingScreen from '../../components/LoadingScreen';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../config/firebaseConfig';
 
 interface User {
   uid: string;
@@ -38,16 +40,17 @@ export default function NewChat({ navigation }: NewChatProps) {
         setLoading(false);
         return;
       }
-      
-      // Mock users data
-      const mockUsers = [
-        { uid: 'user1', displayName: 'Ahmet', email: 'ahmet@test.com' },
-        { uid: 'user2', displayName: 'Mehmet', email: 'mehmet@test.com' },
-        { uid: 'user3', displayName: 'Ayşe', email: 'ayse@test.com' },
-        { uid: 'user4', displayName: 'Fatma', email: 'fatma@test.com' }
-      ];
-      
-      const usersData: User[] = mockUsers.filter(u => u.uid !== user.uid);
+
+      // Fetch users from Firestore
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where('uid', '!=', user.uid));
+      const querySnapshot = await getDocs(q);
+
+      const usersData: User[] = querySnapshot.docs.map((doc) => ({
+        uid: doc.id,
+        ...doc.data(),
+      })) as User[];
+
       setUsers(usersData);
     } catch (error) {
       Alert.alert('Hata', 'Kullanıcılar yüklenemedi');
@@ -69,7 +72,14 @@ export default function NewChat({ navigation }: NewChatProps) {
         Alert.alert('Hata', 'Kullanıcı bilgisi bulunamadı');
         return;
       }
+
+      console.log('Starting chat with user:', otherUser);
+      console.log('Authenticated user:', user);
+      // Create or get existing chat ID
       const chatId = await chatService.createChat([user.uid, otherUser.uid]);
+      console.log('Chat created with ID:', chatId);
+
+      // Navigate to the Chat screen
       navigation.replace('Chat', { chatId, otherUserId: otherUser.uid });
     } catch (error) {
       Alert.alert('Hata', 'Sohbet başlatılamadı');
@@ -81,7 +91,7 @@ export default function NewChat({ navigation }: NewChatProps) {
       className="flex-row items-center p-4 border-b border-gray-200 bg-white"
       onPress={() => startChat(item)}
     >
-              <View className="w-12 h-12 bg-green-500 rounded-full items-center justify-center mr-4">
+              <View className="w-12 h-12 bg-sky-500 rounded-full items-center justify-center mr-4">
           <Text className="text-white font-semibold text-lg">
             {item.displayName?.charAt(0) || 'U'}
           </Text>
@@ -112,7 +122,7 @@ export default function NewChat({ navigation }: NewChatProps) {
           onPress={() => navigation.goBack()}
           className="mr-3"
         >
-          <Text className="text-green-500 text-lg font-semibold">←</Text>
+          <Text className="text-sky-500 text-lg font-semibold">←</Text>
         </TouchableOpacity>
         <Text className="text-xl font-bold text-gray-800">Yeni Sohbet</Text>
       </View>
@@ -142,4 +152,4 @@ export default function NewChat({ navigation }: NewChatProps) {
       />
     </SafeAreaView>
   );
-} 
+}

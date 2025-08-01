@@ -1,18 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
-  Alert,
-} from 'react-native';
+import {View,Text,TextInput,TouchableOpacity,FlatList,KeyboardAvoidingView,Platform,Alert,} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../contexts/AuthContext';
 import { chatService, Message } from '../../services/chatService';
 import LoadingScreen from '../../components/LoadingScreen';
+import { collection, addDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { db } from '../../config/firebaseConfig'; // Ensure Firebase is configured properly
 
 interface ChatProps {
   navigation: any;
@@ -29,9 +22,21 @@ export default function Chat({ navigation, route }: ChatProps) {
 
   useEffect(() => {
     if (!chatId) return;
-    
-    const unsubscribe = chatService.subscribeToMessages(chatId, (messages) => {
-      setMessages(messages);
+
+    const messagesQuery = query(
+      collection(db, 'chats', chatId, 'messages'),
+      orderBy('timestamp', 'asc')
+    );
+
+    const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
+      const fetchedMessages: Message[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        text: doc.data().text || '',
+        senderId: doc.data().senderId || '',
+        senderName: doc.data().senderName || 'Kullanıcı',
+        timestamp: doc.data().timestamp || new Date().toISOString(),
+      }));
+      setMessages(fetchedMessages);
       setLoading(false);
     });
 
@@ -42,14 +47,14 @@ export default function Chat({ navigation, route }: ChatProps) {
     if (!newMessage.trim() || !isAuthenticated || !user) return;
 
     try {
-      await chatService.sendMessage(
-        chatId,
-        newMessage.trim(),
-        user.uid,
-        user.displayName || 'Kullanıcı'
-      );
+      await addDoc(collection(db, 'chats', chatId, 'messages'), {
+        text: newMessage.trim(),
+        senderId: user.uid,
+        senderName: user.displayName || 'Kullanıcı',
+        timestamp: new Date().toISOString(),
+      });
       setNewMessage('');
-    } catch (error: any) {
+    } catch (error) {
       Alert.alert('Hata', 'Mesaj gönderilemedi');
     }
   };
@@ -164,4 +169,4 @@ export default function Chat({ navigation, route }: ChatProps) {
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
-} 
+}
