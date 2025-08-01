@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {View,Text,TextInput,TouchableOpacity,FlatList,KeyboardAvoidingView,Platform,Alert,} from 'react-native';
+import {View,Text,TextInput,TouchableOpacity,FlatList,KeyboardAvoidingView,Platform,Alert, ImageBackground,} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../contexts/AuthContext';
 import { chatService, Message } from '../../services/chatService';
@@ -69,7 +69,7 @@ export default function Chat({ navigation, route }: ChatProps) {
         <View
           className={`max-w-[80%] rounded-2xl px-4 py-2 ${
             isOwnMessage
-              ? 'bg-green-500 rounded-br-md'
+              ? 'bg-sky-500 rounded-br-md'
               : 'bg-gray-200 rounded-bl-md'
           }`}
         >
@@ -82,7 +82,7 @@ export default function Chat({ navigation, route }: ChatProps) {
           </Text>
           <Text
             className={`text-xs mt-1 ${
-              isOwnMessage ? 'text-green-100' : 'text-gray-500'
+              isOwnMessage ? 'text-sky-100' : 'text-gray-500'
             }`}
           >
             {item.timestamp
@@ -102,6 +102,12 @@ export default function Chat({ navigation, route }: ChatProps) {
   }
 
   return (
+    <ImageBackground 
+    source={require('../../assets/swan.png')} // arka plan görseli
+      className="flex-1"
+      resizeMode="cover">
+   
+
     <SafeAreaView className="flex-1 bg-gray-50">
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -115,7 +121,7 @@ export default function Chat({ navigation, route }: ChatProps) {
           >
             <Text className="text-sky-500 text-lg font-semibold">←</Text>
           </TouchableOpacity>
-          <View className="w-10 h-10 bg-green-500 rounded-full items-center justify-center mr-3">
+          <View className="w-10 h-10 bg-sky-500 rounded-full items-center justify-center mr-3">
             <Text className="text-white font-semibold">
               {messages[0]?.senderName?.charAt(0) || 'U'}
             </Text>
@@ -158,7 +164,7 @@ export default function Chat({ navigation, route }: ChatProps) {
           />
           <TouchableOpacity
             className={`w-10 h-10 rounded-full items-center justify-center ${
-              newMessage.trim() ? 'bg-green-500' : 'bg-gray-300'
+              newMessage.trim() ? 'bg-sky-500' : 'bg-gray-300'
             }`}
             onPress={sendMessage}
             disabled={!newMessage.trim()}
@@ -168,5 +174,6 @@ export default function Chat({ navigation, route }: ChatProps) {
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
+     </ImageBackground>
   );
 }

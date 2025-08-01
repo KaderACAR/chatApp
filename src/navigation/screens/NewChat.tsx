@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   Alert,
+  ImageBackground,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../contexts/AuthContext';
@@ -208,6 +209,7 @@ export default function NewChat({ navigation }: NewChatProps) {
 
 
   return (
+
     <SafeAreaView className="flex-1 bg-gray-50">
       {/* Header */}
       <View className="bg-white px-4 py-3 border-b border-gray-200 flex-row items-center">
@@ -252,7 +254,7 @@ export default function NewChat({ navigation }: NewChatProps) {
                   Yeni kullanıcılar kayıt oldukça burada görünecek
                 </Text>
                 <TouchableOpacity
-                  className="bg-green-500 px-6 py-3 rounded-lg mt-4"
+                  className="bg-sky-500 px-6 py-3 rounded-lg mt-4"
                   onPress={addTestUser}
                 >
                   <Text className="text-white font-semibold">Test Kullanıcısı Ekle</Text>
@@ -263,6 +265,7 @@ export default function NewChat({ navigation }: NewChatProps) {
         }
       />
     </SafeAreaView>
+
   );
 }
 
