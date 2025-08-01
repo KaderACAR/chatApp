@@ -1,11 +1,11 @@
 # ChatApp - React Native
 
-WhatsApp benzeri bir mobil chat uygulaması. React Native ve NativeWind kullanılarak geliştirilmiştir.
+Mobil chat uygulaması. React Native ve NativeWind kullanılarak geliştirilmiştir.
 
 ## Özellikler
 
-- 🔐 Kullanıcı kaydı ve girişi (Mock)
-- 💬 Mesajlaşma (Mock)
+- 🔐 Kullanıcı kaydı ve girişi 
+- 💬 Mesajlaşma 
 - 👥 Kullanıcı listesi
 - 🔍 Kullanıcı arama
 - 📱 Modern ve kullanıcı dostu arayüz
@@ -18,6 +18,7 @@ WhatsApp benzeri bir mobil chat uygulaması. React Native ve NativeWind kullanı
 - **TypeScript** - Tip güvenliği
 - **Expo** - Geliştirme platformu
 - **React Navigation** - Navigation yönetimi
+- **AsyncStorage** 
 
 ## Kurulum
 
@@ -52,7 +53,7 @@ src/
 │       ├── Chat.tsx        # Mesajlaşma ekranı
 │       └── NewChat.tsx     # Yeni sohbet ekranı
 ├── services/
-│   ├── authService.ts      # Authentication servisi (Mock)
+│   ├── authService.ts      # Authentication servisi 
 │   └── chatService.ts      # Chat servisi (Mock)
 └── App.tsx                 # Ana uygulama bileşeni
 ```
@@ -65,39 +66,35 @@ src/
 - Modern ve temiz tasarım
 
 ### 2. Register Ekranı
-- Kullanıcı kaydı (ad, e-posta, şifre) (Mock)
+- Kullanıcı kaydı (ad, e-posta, şifre) 
 - Şifre doğrulama
 - Giriş ekranına yönlendirme
 
 ### 3. ChatList Ekranı
-- Mevcut sohbetlerin listesi (Mock)
+- Mevcut sohbetlerin listesi 
 - Son mesaj önizlemesi
 - Yeni sohbet başlatma butonu
 - Çıkış yapma özelliği
 
 ### 4. Chat Ekranı
-- Mesajlaşma (Mock)
+- Mesajlaşma 
 - Mesaj gönderme/alma
 - Otomatik scroll
 - Mesaj zaman damgası
 
 ### 5. NewChat Ekranı
-- Kullanıcı listesi (Mock)
+- Kullanıcı listesi 
 - Kullanıcı arama
 - Yeni sohbet başlatma
 
-## Mock Servisler
+## Firebase
 
-Bu uygulama şu anda mock servisler kullanmaktadır:
+Bu uygulama da firebase kullanmaktadır:
 
-- **Authentication**: Gerçek Firebase Authentication yerine mock servis
-- **Chat**: Gerçek Firestore yerine mock servis
-- **Messages**: Gerçek zamanlı mesajlaşma yerine mock veri
+- **Authentication**: Firebase Authentication 
+- **Chat**: Firestore 
+- **Messages**: 
 
-Gerçek Firebase entegrasyonu için:
-1. Firebase projesi oluşturun
-2. Firebase SDK'yı ekleyin
-3. Mock servisleri gerçek Firebase servisleriyle değiştirin
 
 ## Katkıda Bulunma
 
@@ -105,8 +102,8 @@ Gerçek Firebase entegrasyonu için:
 2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
 3. Commit yapın (`git commit -m 'Add amazing feature'`)
 4. Push yapın (`git push origin feature/amazing-feature`)
-5. Pull Request oluşturun
+
 
 ## Lisans
 
-Bu proje MIT lisansı altında lisanslanmıştır.
+Bu proje MIT lisansı altında lisanslanmıştır. MIT Lisansı © 2025 Kader Acar
