@@ -95,6 +95,9 @@ Bu uygulama da firebase kullanmaktadır:
 - **Chat**: Firestore 
 - **Messages**: 
 
+## GitHub Linki
+projeme gitHub'dan da ulaşabilirsiniz.
+-- https://github.com/KaderACAR/chatApp.git
 
 ## Katkıda Bulunma
 
