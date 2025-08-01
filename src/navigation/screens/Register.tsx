@@ -304,8 +304,7 @@ export default function Register({ navigation }: RegisterProps) {
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry={true}
-                    autoCapitalize="none"
-                    autoCorrect={false}
+                    
                     textContentType="newPassword"
                     onFocus={() => setPasswordFocused(true)}
                     onBlur={() => setPasswordFocused(false)}
@@ -329,8 +328,7 @@ export default function Register({ navigation }: RegisterProps) {
                     value={confirmPassword}
                     onChangeText={setConfirmPassword}
                     secureTextEntry={true}
-                    autoCapitalize="none"
-                    autoCorrect={false}
+                    
                     textContentType="newPassword"
                     onFocus={() => setConfirmPasswordFocused(true)}
                     onBlur={() => setConfirmPasswordFocused(false)}

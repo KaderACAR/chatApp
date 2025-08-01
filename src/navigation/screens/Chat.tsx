@@ -113,7 +113,7 @@ export default function Chat({ navigation, route }: ChatProps) {
             onPress={() => navigation.goBack()}
             className="mr-3"
           >
-            <Text className="text-green-500 text-lg font-semibold">←</Text>
+            <Text className="text-sky-500 text-lg font-semibold">←</Text>
           </TouchableOpacity>
           <View className="w-10 h-10 bg-green-500 rounded-full items-center justify-center mr-3">
             <Text className="text-white font-semibold">
